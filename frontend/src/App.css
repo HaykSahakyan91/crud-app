@@ -1,0 +1,92 @@
+.container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  font-size: 16px;
+}
+
+.add-button {
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-button.hovered {
+  background-color: #218838;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-item {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-text {
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.status-complete {
+  color: #28a745;
+}
+
+.status-incomplete {
+  color: #dc3545;
+}
+
+.hover-complete {
+  color: #19692c;
+}
+
+.hover-incomplete {
+  color: #a71d2a;
+}
+
+.delete-button {
+  margin-left: 1rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #b02a37;
+}
