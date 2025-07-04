@@ -7,18 +7,21 @@ function App() {
   const [hoveredTaskId, setHoveredTaskId] = useState(null);
   const [addButtonHovered, setAddButtonHovered] = useState(false);
 
+  // Use environment variable or fallback to localhost for development
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
   useEffect(() => {
-    fetch("http://localhost:3001/api/tasks")
+    fetch(`${API_URL}/api/tasks`)
       .then((res) => res.json())
       .then((data) => setTasks(data))
       .catch((err) => console.error("Error fetching tasks:", err));
-  }, []);
+  }, [API_URL]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!newTitle.trim()) return;
 
-    fetch("http://localhost:3001/api/tasks", {
+    fetch(`${API_URL}/api/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: newTitle }),
@@ -32,7 +35,7 @@ function App() {
   };
 
   const toggleComplete = (id) => {
-    fetch(`http://localhost:3001/api/tasks/${id}`, {
+    fetch(`${API_URL}/api/tasks/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -45,7 +48,7 @@ function App() {
   };
 
   const deleteTask = (id) => {
-    fetch(`http://localhost:3001/api/tasks/${id}`, {
+    fetch(`${API_URL}/api/tasks/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
