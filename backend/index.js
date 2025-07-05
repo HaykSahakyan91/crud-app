@@ -40,8 +40,8 @@ app.patch('/api/tasks/:id', async (req, res) => {
     const { id } = req.params;
     console.log(`Toggling task with id: ${id}`);
 
-    // Fetch current completed value
-    const taskRes = await pool.query('SELECT completed FROM tasks WHERE id = $1', [id]);
+    // Use double quotes for "completed" to avoid PostgreSQL case-sensitivity issues
+    const taskRes = await pool.query('SELECT "completed" FROM tasks WHERE id = $1', [id]);
     if (taskRes.rows.length === 0) {
       console.warn(`Task with id ${id} not found`);
       return res.status(404).send('Task not found');
@@ -49,9 +49,8 @@ app.patch('/api/tasks/:id', async (req, res) => {
 
     const currentCompleted = taskRes.rows[0].completed;
 
-    // Toggle and update
     const updatedRes = await pool.query(
-      'UPDATE tasks SET completed = $1 WHERE id = $2 RETURNING *',
+      'UPDATE tasks SET "completed" = $1 WHERE id = $2 RETURNING *',
       [!currentCompleted, id]
     );
 
