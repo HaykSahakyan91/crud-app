@@ -9,12 +9,11 @@ const createTable = async () => {
       );
     `);
     console.log('✅ Table created successfully');
-    process.exit();
+    process.exit(0);
   } catch (err) {
-    console.error(err);
+    console.error('❌ Error creating table:', err);
     process.exit(1);
   }
 };
 
 createTable();
-git add init-db.js
