@@ -7,15 +7,18 @@ function App() {
   const [hoveredTaskId, setHoveredTaskId] = useState(null);
   const [addButtonHovered, setAddButtonHovered] = useState(false);
 
-  // Use environment variable or fallback to localhost for development
-  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+  // Set your live backend URL directly
+  const API_URL = "https://crud-backend-k6n6.onrender.com";
 
   useEffect(() => {
     fetch(`${API_URL}/api/tasks`)
       .then((res) => res.json())
-      .then((data) => setTasks(data))
+      .then((data) => {
+        console.log("Fetched tasks:", data);
+        setTasks(data);
+      })
       .catch((err) => console.error("Error fetching tasks:", err));
-  }, [API_URL]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
