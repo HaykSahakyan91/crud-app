@@ -15,7 +15,7 @@ app.get('/api/tasks', async (req, res) => {
     res.json(result.rows);
   } catch (err) {
     console.error('Error fetching tasks:', err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -30,7 +30,7 @@ app.post('/api/tasks', async (req, res) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error('Error adding task:', err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -40,11 +40,10 @@ app.patch('/api/tasks/:id', async (req, res) => {
     const { id } = req.params;
     console.log(`Toggling task with id: ${id}`);
 
-    // Use double quotes for "completed" to avoid PostgreSQL case-sensitivity issues
     const taskRes = await pool.query('SELECT "completed" FROM tasks WHERE id = $1', [id]);
     if (taskRes.rows.length === 0) {
       console.warn(`Task with id ${id} not found`);
-      return res.status(404).send('Task not found');
+      return res.status(404).json({ error: 'Task not found' });
     }
 
     const currentCompleted = taskRes.rows[0].completed;
@@ -57,7 +56,7 @@ app.patch('/api/tasks/:id', async (req, res) => {
     res.json(updatedRes.rows[0]);
   } catch (err) {
     console.error('Error toggling task:', err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -69,7 +68,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
     res.json({ message: 'Task deleted' });
   } catch (err) {
     console.error('Error deleting task:', err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
