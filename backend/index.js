@@ -77,3 +77,5 @@ app.listen(PORT, () => {
 });
 console.log('Backend started. Current environment:');
 console.log(process.env);
+console.log("Using DATABASE_URL:", process.env.DATABASE_URL);
+
