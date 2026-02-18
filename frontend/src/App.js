@@ -8,7 +8,10 @@ function App() {
   const [addButtonHovered, setAddButtonHovered] = useState(false);
 
   // Set your live backend URL directly
-  const API_URL = "https://crud-backend-k6n6.onrender.com";
+  //const API_URL = "https://crud-backend-k6n6.onrender.com";
+  //const API_URL = "http://localhost:3001"; 
+  const API_URL = process.env.REACT_APP_API_URL;
+
 
   useEffect(() => {
     fetch(`${API_URL}/api/tasks`)
