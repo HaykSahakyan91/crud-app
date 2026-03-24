@@ -60,17 +60,31 @@ test.describe('Task CRUD Tests', () => {
   });
 
 
-  test('should display task count', async ({ taskPage, taskName }) => {
+//   test('should display task count', async ({ taskPage, taskName }) => {
 
-  await test.step('Create task', async () => {
-    await taskPage.addTask(taskName);
+//   await test.step('Create task', async () => {
+//     await taskPage.addTask(taskName);
+//   });
+
+//   await test.step('Verify task count is greater than zero', async () => {
+//     const tasks = taskPage.getTaskCount();
+//     await expect(tasks, 'Task list should contain at least one task').not.toHaveCount(0);
+//   });
+
+// });
+test('should display task count', async ({ taskPage, taskName }) => {
+
+    await test.step('Create task', async () => {
+      await taskPage.addTask(taskName);
+    });
+
+    await test.step('Verify task count is greater than zero', async () => {
+      await expect(
+        taskPage.getTaskCount(),
+        'Task list should contain at least one task'
+      ).not.toHaveCount(0);
+    });
+
   });
-
-  await test.step('Verify task count is greater than zero', async () => {
-    const tasks = taskPage.getTaskCount();
-    await expect(tasks, 'Task list should contain at least one task').not.toHaveCount(0);
-  });
-
-});
 
 });
